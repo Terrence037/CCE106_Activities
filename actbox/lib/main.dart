@@ -1,16 +1,26 @@
-import 'package:flutter/material.dart';
-import 'pavlova.dart';
 
-void main() => runApp(const MyApp());
+import 'package:flutter/material.dart';
+import 'task6_login.dart';
+
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: PavlovaPage(),
+      title: 'Flutter Activities',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.teal,
+        ),
+        useMaterial3: true,
+      ),
+      home: const LoginPage(),
     );
   }
 }
