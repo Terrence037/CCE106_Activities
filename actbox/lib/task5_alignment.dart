@@ -1,189 +1,384 @@
 
 import 'package:flutter/material.dart';
 
-class Task5Menu extends StatelessWidget {
+class Task5Menu extends StatefulWidget {
   const Task5Menu({super.key});
 
-  Widget boxes() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(width: 40, height: 40, color: Colors.red),
-        Container(width: 40, height: 40, color: Colors.yellow),
-        Container(width: 40, height: 40, color: Colors.blue),
-      ],
-    );
-  }
+  @override
+  State<Task5Menu> createState() => _Task5MenuState();
+}
 
-  Widget mainRow(String name, MainAxisAlignment alignment) {
-    return Column(
-      children: [
-        Text(
-          'MainAxisAlignment in Row - $name',
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 16),
-        ),
-        const SizedBox(height: 10),
-        SizedBox(
-          width: double.infinity,
-          child: Row(
-            mainAxisAlignment: alignment,
-            children: [
-              Container(width: 40, height: 40, color: Colors.red),
-              Container(width: 40, height: 40, color: Colors.yellow),
-              Container(width: 40, height: 40, color: Colors.blue),
-            ],
-          ),
-        ),
-        const SizedBox(height: 25),
-      ],
-    );
-  }
+class _Task5MenuState extends State<Task5Menu> {
+  int currentPage = 0;
 
-  Widget mainColumn(String name, MainAxisAlignment alignment) {
-    return Column(
-      children: [
-        Text(
-          'MainAxisAlignment in Column - $name',
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 16),
-        ),
-        const SizedBox(height: 10),
-        SizedBox(
-          height: 150,
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: alignment,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(width: 40, height: 40, color: Colors.red),
-              Container(width: 40, height: 40, color: Colors.yellow),
-              Container(width: 40, height: 40, color: Colors.blue),
-            ],
-          ),
-        ),
-        const SizedBox(height: 25),
-      ],
-    );
-  }
+  static const double boxSize = 90;
 
-  Widget crossRow(String name, CrossAxisAlignment alignment) {
-    return Column(
-      children: [
-        Text(
-          'CrossAxisAlignment in Row - $name',
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 16),
-        ),
-        const SizedBox(height: 10),
-        SizedBox(
-          height: 80,
-          width: double.infinity,
-          child: Row(
-            crossAxisAlignment: alignment,
-            children: [
-              Container(width: 40, height: 30, color: Colors.red),
-              Container(width: 40, height: 50, color: Colors.yellow),
-              Container(width: 40, height: 40, color: Colors.blue),
-            ],
-          ),
-        ),
-        const SizedBox(height: 25),
-      ],
-    );
-  }
+  final List<AlignmentDemo> pages = [
+    // MAIN AXIS - COLUMN
+    AlignmentDemo(
+      alignment: 'Start',
+      type: 'MainAxisAlignment',
+      direction: 'Column',
+      description: 'Places children at the top.',
+      main: MainAxisAlignment.start,
+      cross: CrossAxisAlignment.center,
+      isColumn: true,
+    ),
+    AlignmentDemo(
+      alignment: 'Center',
+      type: 'MainAxisAlignment',
+      direction: 'Column',
+      description: 'Places children at the center.',
+      main: MainAxisAlignment.center,
+      cross: CrossAxisAlignment.center,
+      isColumn: true,
+    ),
+    AlignmentDemo(
+      alignment: 'End',
+      type: 'MainAxisAlignment',
+      direction: 'Column',
+      description: 'Places children at the bottom.',
+      main: MainAxisAlignment.end,
+      cross: CrossAxisAlignment.center,
+      isColumn: true,
+    ),
+    AlignmentDemo(
+      alignment: 'Space Between',
+      type: 'MainAxisAlignment',
+      direction: 'Column',
+      description: 'Equal space between children.',
+      main: MainAxisAlignment.spaceBetween,
+      cross: CrossAxisAlignment.center,
+      isColumn: true,
+    ),
+    AlignmentDemo(
+      alignment: 'Space Around',
+      type: 'MainAxisAlignment',
+      direction: 'Column',
+      description: 'Equal space around each child.',
+      main: MainAxisAlignment.spaceAround,
+      cross: CrossAxisAlignment.center,
+      isColumn: true,
+    ),
+    AlignmentDemo(
+      alignment: 'Space Evenly',
+      type: 'MainAxisAlignment',
+      direction: 'Column',
+      description: 'Equal spacing between and around children.',
+      main: MainAxisAlignment.spaceEvenly,
+      cross: CrossAxisAlignment.center,
+      isColumn: true,
+    ),
 
-  Widget crossColumn(String name, CrossAxisAlignment alignment) {
-    return Column(
-      children: [
-        Text(
-          'CrossAxisAlignment in Column - $name',
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 16),
-        ),
-        const SizedBox(height: 10),
-        SizedBox(
-          height: 130,
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: alignment,
-            children: [
-              Container(width: 70, height: 30, color: Colors.red),
-              Container(width: 110, height: 30, color: Colors.yellow),
-              Container(width: 90, height: 30, color: Colors.blue),
-            ],
-          ),
-        ),
-        const SizedBox(height: 25),
-      ],
-    );
-  }
+    // MAIN AXIS - ROW
+    AlignmentDemo(
+      alignment: 'Start',
+      type: 'MainAxisAlignment',
+      direction: 'Row',
+      description: 'Places children at the left.',
+      main: MainAxisAlignment.start,
+      cross: CrossAxisAlignment.center,
+      isColumn: false,
+    ),
+    AlignmentDemo(
+      alignment: 'Center',
+      type: 'MainAxisAlignment',
+      direction: 'Row',
+      description: 'Places children at the center.',
+      main: MainAxisAlignment.center,
+      cross: CrossAxisAlignment.center,
+      isColumn: false,
+    ),
+    AlignmentDemo(
+      alignment: 'End',
+      type: 'MainAxisAlignment',
+      direction: 'Row',
+      description: 'Places children at the right.',
+      main: MainAxisAlignment.end,
+      cross: CrossAxisAlignment.center,
+      isColumn: false,
+    ),
+    AlignmentDemo(
+      alignment: 'Space Between',
+      type: 'MainAxisAlignment',
+      direction: 'Row',
+      description: 'Equal space between children.',
+      main: MainAxisAlignment.spaceBetween,
+      cross: CrossAxisAlignment.center,
+      isColumn: false,
+    ),
+    AlignmentDemo(
+      alignment: 'Space Around',
+      type: 'MainAxisAlignment',
+      direction: 'Row',
+      description: 'Equal space around each child.',
+      main: MainAxisAlignment.spaceAround,
+      cross: CrossAxisAlignment.center,
+      isColumn: false,
+    ),
+    AlignmentDemo(
+      alignment: 'Space Evenly',
+      type: 'MainAxisAlignment',
+      direction: 'Row',
+      description: 'Equal spacing between and around children.',
+      main: MainAxisAlignment.spaceEvenly,
+      cross: CrossAxisAlignment.center,
+      isColumn: false,
+    ),
 
-  Widget baselineRow() {
-    return Column(
-      children: [
-        const Text(
-          'CrossAxisAlignment in Row - Baseline',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 16),
-        ),
-        const SizedBox(height: 10),
-        const SizedBox(
-          height: 60,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
-            children: [
-              Text('Small', style: TextStyle(fontSize: 14)),
-              Text('Medium', style: TextStyle(fontSize: 24)),
-              Text('Large', style: TextStyle(fontSize: 36)),
-            ],
-          ),
-        ),
-        const SizedBox(height: 25),
-      ],
-    );
-  }
+    // CROSS AXIS - COLUMN
+    AlignmentDemo(
+      alignment: 'Start',
+      type: 'CrossAxisAlignment',
+      direction: 'Column',
+      description: 'Aligns children to the left.',
+      main: MainAxisAlignment.center,
+      cross: CrossAxisAlignment.start,
+      isColumn: true,
+    ),
+    AlignmentDemo(
+      alignment: 'Center',
+      type: 'CrossAxisAlignment',
+      direction: 'Column',
+      description: 'Aligns children horizontally at the center.',
+      main: MainAxisAlignment.center,
+      cross: CrossAxisAlignment.center,
+      isColumn: true,
+    ),
+    AlignmentDemo(
+      alignment: 'End',
+      type: 'CrossAxisAlignment',
+      direction: 'Column',
+      description: 'Aligns children to the right.',
+      main: MainAxisAlignment.center,
+      cross: CrossAxisAlignment.end,
+      isColumn: true,
+    ),
+    AlignmentDemo(
+      alignment: 'Stretch',
+      type: 'CrossAxisAlignment',
+      direction: 'Column',
+      description: 'Stretches children across the available width.',
+      main: MainAxisAlignment.center,
+      cross: CrossAxisAlignment.stretch,
+      isColumn: true,
+    ),
+    AlignmentDemo(
+      alignment: 'Baseline',
+      type: 'CrossAxisAlignment',
+      direction: 'Column',
+      description: 'Aligns children using their text baseline.',
+      main: MainAxisAlignment.center,
+      cross: CrossAxisAlignment.baseline,
+      isColumn: true,
+    ),
+
+    // CROSS AXIS - ROW
+    AlignmentDemo(
+      alignment: 'Start',
+      type: 'CrossAxisAlignment',
+      direction: 'Row',
+      description: 'Aligns children to the top.',
+      main: MainAxisAlignment.center,
+      cross: CrossAxisAlignment.start,
+      isColumn: false,
+    ),
+    AlignmentDemo(
+      alignment: 'Center',
+      type: 'CrossAxisAlignment',
+      direction: 'Row',
+      description: 'Aligns children vertically at the center.',
+      main: MainAxisAlignment.center,
+      cross: CrossAxisAlignment.center,
+      isColumn: false,
+    ),
+    AlignmentDemo(
+      alignment: 'End',
+      type: 'CrossAxisAlignment',
+      direction: 'Row',
+      description: 'Aligns children to the bottom.',
+      main: MainAxisAlignment.center,
+      cross: CrossAxisAlignment.end,
+      isColumn: false,
+    ),
+    AlignmentDemo(
+      alignment: 'Stretch',
+      type: 'CrossAxisAlignment',
+      direction: 'Row',
+      description: 'Stretches children across the available height.',
+      main: MainAxisAlignment.center,
+      cross: CrossAxisAlignment.stretch,
+      isColumn: false,
+    ),
+    AlignmentDemo(
+      alignment: 'Baseline',
+      type: 'CrossAxisAlignment',
+      direction: 'Row',
+      description: 'Aligns children using their text baseline.',
+      main: MainAxisAlignment.center,
+      cross: CrossAxisAlignment.baseline,
+      isColumn: false,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final page = pages[currentPage];
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Congson Activity - Task 5'),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
+        title: const Text('Congson - Task5'),
+        centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            mainRow('Center', MainAxisAlignment.center),
-            mainRow('SpaceAround', MainAxisAlignment.spaceAround),
-            mainRow('SpaceBetween', MainAxisAlignment.spaceBetween),
-            mainRow('SpaceEvenly', MainAxisAlignment.spaceEvenly),
-            mainRow('Start', MainAxisAlignment.start),
-            mainRow('End', MainAxisAlignment.end),
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              const SizedBox(height: 25),
 
-            mainColumn('Center', MainAxisAlignment.center),
-            mainColumn('SpaceAround', MainAxisAlignment.spaceAround),
-            mainColumn('SpaceBetween', MainAxisAlignment.spaceBetween),
-            mainColumn('SpaceEvenly', MainAxisAlignment.spaceEvenly),
-            mainColumn('Start', MainAxisAlignment.start),
-            mainColumn('End', MainAxisAlignment.end),
+              Text(
+                page.direction,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey,
+                ),
+              ),
 
-            crossRow('Start', CrossAxisAlignment.start),
-            crossRow('End', CrossAxisAlignment.end),
-            baselineRow(),
-            crossRow('Center', CrossAxisAlignment.center),
-            crossRow('Stretch', CrossAxisAlignment.stretch),
+              Text(
+                page.type,
+                style: const TextStyle(
+                  fontSize: 23,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
 
-            crossColumn('Start', CrossAxisAlignment.start),
-            crossColumn('End', CrossAxisAlignment.end),
-            crossColumn('Center', CrossAxisAlignment.center),
-            crossColumn('Stretch', CrossAxisAlignment.stretch),
-          ],
-        ),
+              Text(
+                page.alignment,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.blue,
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  page.description,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 14),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Center(
+                    child: SizedBox.expand(
+                      child: page.isColumn
+                          ? Column(
+                              mainAxisAlignment: page.main,
+                              crossAxisAlignment: page.cross,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                buildDemoBox(Colors.red),
+                                buildDemoBox(Colors.yellow),
+                                buildDemoBox(Colors.blue),
+                              ],
+                            )
+                          : Row(
+                              mainAxisAlignment: page.main,
+                              crossAxisAlignment: page.cross,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                buildDemoBox(Colors.red),
+                                buildDemoBox(Colors.yellow),
+                                buildDemoBox(Colors.blue),
+                              ],
+                            ),
+                    ),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 45),
+            ],
+          ),
+
+          // Bottom-right navigation arrows
+          Positioned(
+            bottom: 10,
+            right: 8,
+            child: Opacity(
+              opacity: 0.4,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back_ios),
+                    iconSize: 18,
+                    onPressed: currentPage > 0
+                        ? () {
+                            setState(() {
+                              currentPage--;
+                            });
+                          }
+                        : null,
+                  ),
+
+                  Text(
+                    '${currentPage + 1}/${pages.length}',
+                    style: const TextStyle(fontSize: 11),
+                  ),
+
+                  IconButton(
+                    icon: const Icon(Icons.arrow_forward_ios),
+                    iconSize: 18,
+                    onPressed: currentPage < pages.length - 1
+                        ? () {
+                            setState(() {
+                              currentPage++;
+                            });
+                          }
+                        : null,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
+
+  Widget buildDemoBox(Color color) {
+    return Container(
+      width: boxSize,
+      height: boxSize,
+      color: color,
+    );
+  }
+}
+
+class AlignmentDemo {
+  final String alignment;
+  final String type;
+  final String direction;
+  final String description;
+  final MainAxisAlignment main;
+  final CrossAxisAlignment cross;
+  final bool isColumn;
+
+  const AlignmentDemo({
+    required this.alignment,
+    required this.type,
+    required this.direction,
+    required this.description,
+    required this.main,
+    required this.cross,
+    required this.isColumn,
+  });
 }
