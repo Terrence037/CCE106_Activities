@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "303414534672",
+    "project_id": "notes-26d76",
+    "storage_bucket": "notes-26d76.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303414534672:android:2a04a051bf72d1d1942095",
+        "android_client_info": {
+          "package_name": "com.example.task8_firebase_crud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303414534672-bqiu8tkm3k1mr4uv02bjris9psedolk8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_di_Xm-cXhYs_dheMbKQKQm8ZbFd211o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303414534672-bqiu8tkm3k1mr4uv02bjris9psedolk8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "303414534672-mkunejklg81gdgjq0ojr6k87dhvh40h7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.task8FirebaseCrud"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
